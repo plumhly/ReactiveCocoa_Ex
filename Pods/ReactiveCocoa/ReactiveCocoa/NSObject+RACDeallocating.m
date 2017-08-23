@@ -15,6 +15,7 @@
 
 static const void *RACObjectCompoundDisposable = &RACObjectCompoundDisposable;
 
+//返回进行交换的 class Set
 static NSMutableSet *swizzledClasses() {
 	static dispatch_once_t onceToken;
 	static NSMutableSet *swizzledClasses = nil;
@@ -25,6 +26,7 @@ static NSMutableSet *swizzledClasses() {
 	return swizzledClasses;
 }
 
+//方法转换 dealloc
 static void swizzleDeallocIfNeeded(Class classToSwizzle) {
 	@synchronized (swizzledClasses()) {
 		NSString *className = NSStringFromClass(classToSwizzle);
@@ -70,6 +72,7 @@ static void swizzleDeallocIfNeeded(Class classToSwizzle) {
 }
 
 @implementation NSObject (RACDeallocating)
+
 
 - (RACSignal *)rac_willDeallocSignal {
 	RACSignal *signal = objc_getAssociatedObject(self, _cmd);//_cmd 是一个selector,typedef struct objc_selector *SEL;

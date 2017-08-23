@@ -198,7 +198,7 @@
 		// if only one stream is given, the result is still a stream of tuples.
 		if (current == nil) {
 			current = [stream map:^(id x) {
-				return RACTuplePack(x);
+				return RACTuplePack(x);//返回tuple
 			}];
 
 			continue;

@@ -10,7 +10,7 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "Extension_T.h"
 
-#define MI(...) my(_0, _1, __VA_ARGS__)
+#define MI(_0, _1, _2) my(_1, _2)
 #define my(x, y) x+y
 
 @interface ViewController ()
@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    MI(1,2,3);
+    int c = MI(1,2,3);
     [RACObserve(self, name) subscribeNext:^(NSString *x) {
         NSLog(@"%@", x);
     }];
