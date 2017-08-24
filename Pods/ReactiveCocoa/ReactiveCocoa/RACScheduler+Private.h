@@ -12,7 +12,7 @@
 extern NSString * const RACSchedulerCurrentSchedulerKey;
 
 // A private interface for internal RAC use only.
-@interface RACScheduler ()
+@interface RACScheduler ()//这是 RACScheduler Extension
 
 // A dedicated scheduler that fills two requirements:
 //
@@ -22,7 +22,7 @@ extern NSString * const RACSchedulerCurrentSchedulerKey;
 // To fulfill those two, if we already have a valid +currentScheduler, it
 // immediately executes scheduled blocks. If we don't, it will execute scheduled
 // blocks with a private background scheduler.
-+ (instancetype)subscriptionScheduler;
++ (instancetype)subscriptionScheduler;//RACSubscriptionScheduler单例
 
 // Initializes the receiver with the given name.
 //

@@ -52,7 +52,7 @@
 			unitSingleton->_value = RACUnit.defaultUnit;
 		});
 
-		return unitSingleton;
+		return unitSingleton;//占位
 	} else if (value == nil) {
 		static RACReturnSignal *nilSingleton;
 		static dispatch_once_t nilPred;

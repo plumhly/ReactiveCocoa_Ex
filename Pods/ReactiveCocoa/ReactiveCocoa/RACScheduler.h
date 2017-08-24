@@ -14,7 +14,7 @@
 /// RACSchedulerPriorityDefault    - Default priority.
 /// RACSchedulerPriorityLow        - Low priority.
 /// RACSchedulerPriorityBackground - Background priority.
-typedef enum : long {
+typedef enum : long {//这里是每个优先级属于 dispatch_queue_priority_t， 它是long
 	RACSchedulerPriorityHigh = DISPATCH_QUEUE_PRIORITY_HIGH,
 	RACSchedulerPriorityDefault = DISPATCH_QUEUE_PRIORITY_DEFAULT,
 	RACSchedulerPriorityLow = DISPATCH_QUEUE_PRIORITY_LOW,

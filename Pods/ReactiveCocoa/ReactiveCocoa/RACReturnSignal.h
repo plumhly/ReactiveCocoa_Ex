@@ -10,6 +10,7 @@
 
 // A private `RACSignal` subclasses that synchronously sends a value to any
 // subscribers, then completes.
+//持有value的类，value可以是nil, obj,RACUnit
 @interface RACReturnSignal : RACSignal
 
 + (RACSignal *)return:(id)value;

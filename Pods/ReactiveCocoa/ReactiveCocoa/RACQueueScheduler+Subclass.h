@@ -15,6 +15,9 @@
 @interface RACQueueScheduler ()
 
 /// The queue on which blocks are enqueued.
+
+//在arc中把queue看做object，所以要用strong，osx>10.8,ios>ios6,https://stackoverflow.com/questions/8904206/what-property-should-i-use-for-a-dispatch-queue-after-arc
+
 #if OS_OBJECT_HAVE_OBJC_SUPPORT
 @property (nonatomic, strong, readonly) dispatch_queue_t queue;
 #else

@@ -25,7 +25,7 @@
 	self = [super initWithName:@"com.ReactiveCocoa.RACScheduler.subscriptionScheduler"];
 	if (self == nil) return nil;
 
-	_backgroundScheduler = [RACScheduler scheduler];
+	_backgroundScheduler = [RACScheduler scheduler];//backgroundScheduler属性是readonly，所以没有setter,这里直接给实例变量赋值
 
 	return self;
 }

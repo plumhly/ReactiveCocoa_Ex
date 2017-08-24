@@ -46,7 +46,9 @@
 	NSCParameterAssert(date != nil);
 
 	double seconds = 0;
-	double frac = modf(date.timeIntervalSince1970, &seconds);
+    double frac = modf(date.timeIntervalSince1970, &seconds);/*modf() 将浮点数分解为整数和小数部分，其原型为： double modf (double x, double* intpart);
+    【参数】x 为带分解双精度浮点数，intpart 为用来保存整数部分的指针。
+    【返回值】返回分解后的小数部分 */
 
 	struct timespec walltime = {
 		.tv_sec = (time_t)fmin(fmax(seconds, LONG_MIN), LONG_MAX),
