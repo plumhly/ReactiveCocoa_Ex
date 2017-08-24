@@ -85,6 +85,7 @@
 
 @end
 
+//这里之所以用category分离接口，因为最开始 Objective-C 时，并没有支持 Class Extension，当时只能凑活的用个 Private 的 Category 充当。http://blog.sunnyxx.com/2016/04/22/objc-class-extension-tips/
 @interface RACSignal (RACStream)
 
 /// Returns a signal that immediately sends the given value and then completes.

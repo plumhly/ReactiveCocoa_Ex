@@ -12,6 +12,7 @@
 
 /// A disposable encapsulates the work necessary to tear down and cleanup a
 /// subscription.
+// 调用dispose函数执行block
 @interface RACDisposable : NSObject
 
 /// Whether the receiver has been disposed.
@@ -30,6 +31,7 @@
 
 /// Returns a new disposable which will dispose of this disposable when it gets
 /// dealloc'd.
+//用一个 RACDisposable 封装RACScopedDisposable，RACScopedDisposable在dealloc的时候会调用 RACDisposable 的 dispose
 - (RACScopedDisposable *)asScopedDisposable;
 
 @end

@@ -109,6 +109,7 @@
 	return [self tupleWithObjectsFromArray:array convertNullsToNils:NO];
 }
 
+//赋值到backingArray，是否把nil转换成RACTupleNil
 + (instancetype)tupleWithObjectsFromArray:(NSArray *)array convertNullsToNils:(BOOL)convert {
 	RACTuple *tuple = [[self alloc] init];
 	

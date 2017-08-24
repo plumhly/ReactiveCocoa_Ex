@@ -10,6 +10,7 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "Extension_T.h"
 
+//宏中用 _0, _1等和字母表示一样的，如果不想用很多的字母，就可以用这种形式
 #define MI(_0, _1, _2) my(_1, _2)
 #define my(x, y) x+y
 

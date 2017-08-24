@@ -47,6 +47,7 @@
 ///
 /// It should never be necessary to create a tuple nil yourself. Just use
 /// +tupleNil.
+//用来 替代nil，比如array中不能有nil
 @interface RACTupleNil : NSObject <NSCopying, NSCoding>
 /// A singleton instance.
 + (RACTupleNil *)tupleNil;

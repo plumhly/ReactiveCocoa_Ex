@@ -93,7 +93,7 @@
 	Class class = self.class;
 	
 	return [[self flattenMap:^(id value) {
-		return [class return:block(value)];
+		return [class return:block(value)];//RACTuple(x)
 	}] setNameWithFormat:@"[%@] -map:", self.name];
 }
 
@@ -197,8 +197,8 @@
 		// For the first stream, just wrap its values in a RACTuple. That way,
 		// if only one stream is given, the result is still a stream of tuples.
 		if (current == nil) {
-			current = [stream map:^(id x) {
-				return RACTuplePack(x);//返回tuple
+			current = [stream map:^(id x) {//调用 RACStream 的map
+				return RACTuplePack(x);//返回tuple，[RACTuple tupleWithObjectsFromArray:@[x]]
 			}];
 
 			continue;
