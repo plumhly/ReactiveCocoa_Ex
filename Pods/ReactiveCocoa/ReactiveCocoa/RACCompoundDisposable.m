@@ -22,7 +22,7 @@
 
 static CFMutableArrayRef RACCreateDisposablesArray(void) {
 	// Compare values using only pointer equality.
-	CFArrayCallBacks callbacks = kCFTypeArrayCallBacks;
+	CFArrayCallBacks callbacks = kCFTypeArrayCallBacks;//持有对象
 	callbacks.equal = NULL;
 
 	return CFArrayCreateMutable(NULL, 0, &callbacks);
@@ -39,14 +39,14 @@ static CFMutableArrayRef RACCreateDisposablesArray(void) {
 	// disposables.
 	//
 	// This array should only be manipulated while _spinLock is held.
-	RACDisposable *_inlineDisposables[RACCompoundDisposableInlineCount];
+	RACDisposable *_inlineDisposables[RACCompoundDisposableInlineCount];//前两个RACDisposable，指针数组
 	#endif
 
 	// Contains the receiver's disposables.
 	//
 	// This array should only be manipulated while _spinLock is held. If
 	// `_disposed` is YES, this may be NULL.
-	CFMutableArrayRef _disposables;
+	CFMutableArrayRef _disposables;//除了前两个RACDisposable的数据
 
 	// Whether the receiver has already been disposed.
 	//

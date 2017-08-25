@@ -55,7 +55,7 @@
 		.tv_nsec = (long)fmin(fmax(frac * NSEC_PER_SEC, LONG_MIN), LONG_MAX)
 	};
 
-	return dispatch_walltime(&walltime, 0);
+	return dispatch_walltime(&walltime, 0);//dispatch_time 在电脑睡眠的时候会停止运行， dispatch_walltime 能在睡眠的时候正常运行.比如: So if you want to do an action in one hour from now, but after 5 minutes your computer goes to sleep for 50 minutes, dispatch_walltime will execute an hour from now, 5 minutes after the computer wakes up. dispatch_time will execute after the computer is running for an hour, that is 55 minutes after it wakes up.
 }
 
 #pragma mark RACScheduler
