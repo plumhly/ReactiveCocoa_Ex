@@ -34,12 +34,12 @@ static void swizzleDeallocIfNeeded(Class classToSwizzle) {
 
 		SEL deallocSelector = sel_registerName("dealloc");
 
-		__block void (*originalDealloc)(__unsafe_unretained id, SEL) = NULL;
+		__block void (*originalDealloc)(__unsafe_unretained id, SEL) = NULL;//此处用__block,是为了block捕获 originalDealloc ，没有添加__block,是值copy.添加了就是引用。
 
 		id newDealloc = ^(__unsafe_unretained id self) {
 			RACCompoundDisposable *compoundDisposable = objc_getAssociatedObject(self, RACObjectCompoundDisposable);
 			[compoundDisposable dispose];
-
+            //如果没有 originalDealloc，那么尝试调用父类的 originalDealloc
 			if (originalDealloc == NULL) {
 				struct objc_super superInfo = {
 					.receiver = self,
@@ -74,6 +74,7 @@ static void swizzleDeallocIfNeeded(Class classToSwizzle) {
 @implementation NSObject (RACDeallocating)
 
 
+//
 - (RACSignal *)rac_willDeallocSignal {
 	RACSignal *signal = objc_getAssociatedObject(self, _cmd);//_cmd 是一个selector,typedef struct objc_selector *SEL;
 	if (signal != nil) return signal;

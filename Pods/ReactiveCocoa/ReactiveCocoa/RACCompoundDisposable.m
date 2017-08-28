@@ -22,6 +22,18 @@
 
 static CFMutableArrayRef RACCreateDisposablesArray(void) {
 	// Compare values using only pointer equality.
+    /*
+     typedef struct {
+         CFIndex				version;//0
+         CFArrayRetainCallBack		retain; //The callback used to retain each value as they are added to the collection. If NULL, values are not retained.
+     
+         CFArrayReleaseCallBack		release;//The callback used to release values as they are removed from the collection. If NULL, values are not released
+     
+         CFArrayCopyDescriptionCallBack	copyDescription;
+     
+         CFArrayEqualCallBack		equal;//The callback used to compare values in the array for equality for some operations. If NULL, the collection will use pointer equality to compare values in the collection.
+     } CFArrayCallBacks;
+     */
 	CFArrayCallBacks callbacks = kCFTypeArrayCallBacks;//持有对象
 	callbacks.equal = NULL;
 
@@ -51,7 +63,7 @@ static CFMutableArrayRef RACCreateDisposablesArray(void) {
 	// Whether the receiver has already been disposed.
 	//
 	// This ivar should only be accessed while _spinLock is held.
-	BOOL _disposed;
+	BOOL _disposed;//是否正在执行disposed方法
 }
 
 @end
@@ -61,6 +73,7 @@ static CFMutableArrayRef RACCreateDisposablesArray(void) {
 #pragma mark Properties
 
 - (BOOL)isDisposed {
+    //OSSpinLock可能引起优先级翻转
 	OSSpinLockLock(&_spinLock);
 	BOOL disposed = _disposed;
 	OSSpinLockUnlock(&_spinLock);
@@ -198,6 +211,7 @@ static void disposeEach(const void *value, void *context) {
 	[disposable dispose];
 }
 
+//把包含的所有 RACDisposable 的 dispose方法
 - (void)dispose {
 	#if RACCompoundDisposableInlineCount
 	RACDisposable *inlineCopy[RACCompoundDisposableInlineCount];
