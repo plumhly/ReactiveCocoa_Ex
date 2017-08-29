@@ -111,6 +111,7 @@
 
 		RACCompoundDisposable *compoundDisposable = [RACCompoundDisposable compoundDisposable];
 
+        //从signals移除signal，compoundDisposable中移除finishedDisposable
 		void (^completeSignal)(RACSignal *, RACDisposable *) = ^(RACSignal *signal, RACDisposable *finishedDisposable) {
 			BOOL removeDisposable = NO;
 

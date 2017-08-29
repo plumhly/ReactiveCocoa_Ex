@@ -75,7 +75,7 @@
 			id stream = block(value) ?: [class empty];
 			NSCAssert([stream isKindOfClass:RACStream.class], @"Value returned from -flattenMap: is not a stream: %@", stream);
 
-			return stream;
+			return stream;//1.RACReturnSignal
 		};
 	}] setNameWithFormat:@"[%@] -flattenMap:", self.name];
 }
@@ -93,7 +93,7 @@
 	Class class = self.class;
 	
 	return [[self flattenMap:^(id value) {
-		return [class return:block(value)];//RACTuple(x)
+		return [class return:block(value)];//block(value) = RACTuple(value),对于class是RACReplaySubject，[class return:block(value)]返回 RACReturnSignal
 	}] setNameWithFormat:@"[%@] -map:", self.name];
 }
 

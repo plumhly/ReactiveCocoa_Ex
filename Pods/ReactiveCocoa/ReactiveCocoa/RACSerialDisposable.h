@@ -10,6 +10,7 @@
 
 /// A disposable that contains exactly one other disposable and allows it to be
 /// swapped out atomically.
+//带有一个RACDisposable属性的 RACDisposable
 @interface RACSerialDisposable : RACDisposable
 
 /// The inner disposable managed by the serial disposable.

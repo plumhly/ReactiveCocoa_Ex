@@ -15,7 +15,7 @@
 /// of, the given disposable is immediately disposed. This allows a compound
 /// disposable to act as a stand-in for a disposable that will be delivered
 /// asynchronously.
-@interface RACCompoundDisposable : RACDisposable
+@interface RACCompoundDisposable : RACDisposable//类似链表
 
 /// Creates and returns a new compound disposable.
 + (instancetype)compoundDisposable;

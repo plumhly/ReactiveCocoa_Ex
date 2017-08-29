@@ -50,6 +50,7 @@
  * Like #weakify, but uses \c __unsafe_unretained instead, for targets or
  * classes that do not support weak references.
  */
+//等价于rac_weakify_(0,__unsafe_unretained,__VA_ARGS__),最终结果:__unsafe_unretained __typeof__(self) self_weak_ = (self);
 #define unsafeify(...) \
     rac_keywordify \
     metamacro_foreach_cxt(rac_weakify_,, __unsafe_unretained, __VA_ARGS__)

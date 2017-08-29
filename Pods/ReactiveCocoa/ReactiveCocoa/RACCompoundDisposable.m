@@ -83,6 +83,7 @@ static CFMutableArrayRef RACCreateDisposablesArray(void) {
 
 #pragma mark Lifecycle
 
+//和init一样
 + (instancetype)compoundDisposable {
 	return [[self alloc] initWithDisposables:nil];
 }
@@ -135,6 +136,7 @@ static CFMutableArrayRef RACCreateDisposablesArray(void) {
 
 #pragma mark Addition and Removal
 
+//添加RACDisposable，如果此时正常 RACCompoundDisposable dispose被调用，那么调用disposable的 dispose方法
 - (void)addDisposable:(RACDisposable *)disposable {
 	NSCParameterAssert(disposable != self);
 	if (disposable == nil || disposable.disposed) return;
@@ -146,6 +148,7 @@ static CFMutableArrayRef RACCreateDisposablesArray(void) {
 		if (_disposed) {
 			shouldDispose = YES;
 		} else {
+            //优先加入到_inlineDisposables，如果_inlineDisposables已经满了，则加入_disposables
 			#if RACCompoundDisposableInlineCount
 			for (unsigned i = 0; i < RACCompoundDisposableInlineCount; i++) {
 				if (_inlineDisposables[i] == nil) {
@@ -211,7 +214,7 @@ static void disposeEach(const void *value, void *context) {
 	[disposable dispose];
 }
 
-//把包含的所有 RACDisposable 的 dispose方法
+//把包含的所有 RACDisposable 的 dispose方法，批处理
 - (void)dispose {
 	#if RACCompoundDisposableInlineCount
 	RACDisposable *inlineCopy[RACCompoundDisposableInlineCount];

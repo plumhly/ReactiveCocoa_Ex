@@ -74,7 +74,7 @@ static void swizzleDeallocIfNeeded(Class classToSwizzle) {
 @implementation NSObject (RACDeallocating)
 
 
-//
+//获取RACReplaySubject，并且会创建一个RACDisposable，在block中会调用RACReplaySubject的sendCompleted方法。
 - (RACSignal *)rac_willDeallocSignal {
 	RACSignal *signal = objc_getAssociatedObject(self, _cmd);//_cmd 是一个selector,typedef struct objc_selector *SEL;
 	if (signal != nil) return signal;
@@ -82,7 +82,7 @@ static void swizzleDeallocIfNeeded(Class classToSwizzle) {
 	RACReplaySubject *subject = [RACReplaySubject subject];
 
 	[self.rac_deallocDisposable addDisposable:[RACDisposable disposableWithBlock:^{
-		[subject sendCompleted];
+		[subject sendCompleted];//发送 完成信号
 	}]];
 
 	objc_setAssociatedObject(self, _cmd, subject, OBJC_ASSOCIATION_RETAIN);
@@ -92,12 +92,13 @@ static void swizzleDeallocIfNeeded(Class classToSwizzle) {
 
 - (RACCompoundDisposable *)rac_deallocDisposable {
 	@synchronized (self) {
+        //维护一个 RACCompoundDisposable 实例，这个实例的dealloc方法被替换了。
 		RACCompoundDisposable *compoundDisposable = objc_getAssociatedObject(self, RACObjectCompoundDisposable);
 		if (compoundDisposable != nil) return compoundDisposable;
 
 		swizzleDeallocIfNeeded(self.class);
 
-		compoundDisposable = [RACCompoundDisposable compoundDisposable];
+		compoundDisposable = [RACCompoundDisposable compoundDisposable];//类似 【【RACCompoundDisposable alloc】int 】
 		objc_setAssociatedObject(self, RACObjectCompoundDisposable, compoundDisposable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 
 		return compoundDisposable;

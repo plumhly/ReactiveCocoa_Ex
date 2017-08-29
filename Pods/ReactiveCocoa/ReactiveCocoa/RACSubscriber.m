@@ -75,8 +75,17 @@
 
 - (void)sendError:(NSError *)e {
 	@synchronized (self) {
-		void (^errorBlock)(NSError *) = [self.error copy];
-		[self.disposable dispose];
+		void (^errorBlock)(NSError *) = [self.error copy];//把block进行copy操作。这样self.error被值为nil也不影响到errorBlock；例子：
+        /*
+         void(^my)(void) = ^ {
+         NSLog(@"fist");
+         };
+         
+         void(^you)(void) = [my copy];
+         my = nil;
+         you();//打印fist
+         */
+		[self.disposable dispose];//这里之所以更
 
 		if (errorBlock == nil) return;
 		errorBlock(e);
@@ -93,11 +102,12 @@
 	}
 }
 
+//把otherDisposable加入自己的disposable，并创建一个RACDisposable加入otherDisposable，在otherDisposable dispose的时候把otherDisposable从自己的disposable移除
 - (void)didSubscribeWithDisposable:(RACCompoundDisposable *)otherDisposable {
 	if (otherDisposable.disposed) return;
 
 	RACCompoundDisposable *selfDisposable = self.disposable;
-	[selfDisposable addDisposable:otherDisposable];
+	[selfDisposable addDisposable:otherDisposable];//
 
 	@unsafeify(otherDisposable);
 

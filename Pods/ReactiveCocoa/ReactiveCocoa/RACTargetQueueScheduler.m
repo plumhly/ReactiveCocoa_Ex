@@ -13,7 +13,7 @@
 
 #pragma mark Lifecycle
 
-//依靠name来 创建 queue，并且设置目标targetQueue为它的目标queue
+//依靠name来 创建 串行queue，并且设置目标targetQueue为它的目标queue
 - (id)initWithName:(NSString *)name targetQueue:(dispatch_queue_t)targetQueue {
 	NSCParameterAssert(targetQueue != NULL);
 

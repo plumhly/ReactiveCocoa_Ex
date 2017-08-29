@@ -14,6 +14,7 @@
 
 // A private subscriber that passes through all events to another subscriber
 // while not disposed.
+//传递事件
 @interface RACPassthroughSubscriber : NSObject <RACSubscriber>
 
 // Initializes the receiver to pass through events until disposed.

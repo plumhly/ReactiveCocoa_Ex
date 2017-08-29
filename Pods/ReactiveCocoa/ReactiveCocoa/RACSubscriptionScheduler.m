@@ -20,7 +20,7 @@
 @implementation RACSubscriptionScheduler
 
 #pragma mark Lifecycle
-
+//初始化super.name,并且创建一个_backgroundScheduler的RACScheduler
 - (id)init {
 	self = [super initWithName:@"com.ReactiveCocoa.RACScheduler.subscriptionScheduler"];
 	if (self == nil) return nil;

@@ -9,6 +9,7 @@
 #import "RACSubscriber.h"
 
 // A simple block-based subscriber.
+//订阅者
 @interface RACSubscriber : NSObject <RACSubscriber>
 
 // Creates a new subscriber with the given blocks.

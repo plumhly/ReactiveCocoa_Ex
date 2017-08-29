@@ -54,6 +54,7 @@
 	return self;
 }
 
+//block在dealloc的时候触发
 + (instancetype)disposableWithBlock:(void (^)(void))block {
 	return [[self alloc] initWithBlock:block];
 }
