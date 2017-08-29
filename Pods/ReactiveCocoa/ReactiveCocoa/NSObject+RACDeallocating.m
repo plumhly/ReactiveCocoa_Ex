@@ -74,12 +74,12 @@ static void swizzleDeallocIfNeeded(Class classToSwizzle) {
 @implementation NSObject (RACDeallocating)
 
 
-//获取RACReplaySubject，并且会创建一个RACDisposable，在block中会调用RACReplaySubject的sendCompleted方法。
+//获取RACReplaySubject，并且会创建一个RACDisposable加入到维护的RACCompoundDisposable，在block中会调用RACReplaySubject的sendCompleted方法。
 - (RACSignal *)rac_willDeallocSignal {
 	RACSignal *signal = objc_getAssociatedObject(self, _cmd);//_cmd 是一个selector,typedef struct objc_selector *SEL;
 	if (signal != nil) return signal;
 
-	RACReplaySubject *subject = [RACReplaySubject subject];
+	RACReplaySubject *subject = [RACReplaySubject subject];//相等于调用[RACReplaySubject init]
 
 	[self.rac_deallocDisposable addDisposable:[RACDisposable disposableWithBlock:^{
 		[subject sendCompleted];//发送 完成信号

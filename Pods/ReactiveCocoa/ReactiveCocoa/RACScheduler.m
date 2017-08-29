@@ -66,6 +66,7 @@ NSString * const RACSchedulerCurrentSchedulerKey = @"RACSchedulerCurrentSchedule
 	return mainThreadScheduler;
 }
 
+//返回的是RACTargetQueueScheduler的实例
 + (instancetype)schedulerWithPriority:(RACSchedulerPriority)priority name:(NSString *)name {
 	return [[RACTargetQueueScheduler alloc] initWithName:name targetQueue:dispatch_get_global_queue(priority, 0)];
 }
@@ -75,9 +76,10 @@ NSString * const RACSchedulerCurrentSchedulerKey = @"RACSchedulerCurrentSchedule
 }
 
 + (instancetype)scheduler {
-	return [self schedulerWithPriority:RACSchedulerPriorityDefault];
+	return [self schedulerWithPriority:RACSchedulerPriorityDefault];//global queue
 }
 
+//一个RACSubscriptionScheduler实例，这个实例有一个backgroundScheduler:RACScheduler的属性，
 + (instancetype)subscriptionScheduler {
 	static dispatch_once_t onceToken;
 	static RACScheduler *subscriptionScheduler;
@@ -195,6 +197,7 @@ NSString * const RACSchedulerCurrentSchedulerKey = @"RACSchedulerCurrentSchedule
 	// after our block is done executing, but only *after* all our concurrent
 	// invocations are done.
 
+    //这里可能针对于并行执行任务，保证该线程只有一个key
 	RACScheduler *previousScheduler = RACScheduler.currentScheduler;
 	NSThread.currentThread.threadDictionary[RACSchedulerCurrentSchedulerKey] = self;
 

@@ -32,6 +32,7 @@
 
 #pragma mark Lifecycle
 
+//block为self
 - (id)init {
 	self = [super init];
 	if (self == nil) return nil;
@@ -74,6 +75,7 @@
 
 	while (YES) {
 		void *blockPtr = _disposeBlock;
+        //组函数用于比较__oldValue是否与__theValue指针指向的内存位置的值匹配，如果匹配，则将__newValue的值存储到__theValue指向的内存位置。可以根据需要使用barrier版本
 		if (OSAtomicCompareAndSwapPtrBarrier(blockPtr, NULL, &_disposeBlock)) {
 			if (blockPtr != (__bridge void *)self) {
 				disposeBlock = CFBridgingRelease(blockPtr);//把core foundation的对象转换成oc对象，由arc管理生命周期，等同于__bridge_transfer

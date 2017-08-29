@@ -13,6 +13,7 @@
 
 /// Creates a new tuple with the given values. At least one value must be given.
 /// Values can be nil.
+//[RACTuple tupleWithObjectsFromArray:@[...]
 #define RACTuplePack(...) \
     RACTuplePack_(__VA_ARGS__)
 

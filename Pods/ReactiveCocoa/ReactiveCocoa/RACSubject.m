@@ -51,10 +51,12 @@
 
 #pragma mark Subscription
 
+//根据self,subscriber、disposable创建一个RACPassthroughSubscriber，并且创建一个RACDisposable，当这个RACDisposable在调用dispose的时候把RACPassthroughSubscriber从subscribers中移除
 - (RACDisposable *)subscribe:(id<RACSubscriber>)subscriber {
 	NSCParameterAssert(subscriber != nil);
 
 	RACCompoundDisposable *disposable = [RACCompoundDisposable compoundDisposable];
+    //这里的subscriber是值传递，不会影响传进来的参数的原型
 	subscriber = [[RACPassthroughSubscriber alloc] initWithSubscriber:subscriber signal:self disposable:disposable];
 
 	NSMutableArray *subscribers = self.subscribers;

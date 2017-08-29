@@ -42,7 +42,7 @@
 
 	RACSignal *deallocSignal = [[RACSignal
 		zip:@[
-			self.rac_willDeallocSignal,//target
+			self.rac_willDeallocSignal,//1.RACReplaySubject
 			strongObserver.rac_willDeallocSignal ?: [RACSignal never]//self
 		]]
 		doCompleted:^{

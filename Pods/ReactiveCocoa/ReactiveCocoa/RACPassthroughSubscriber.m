@@ -48,6 +48,7 @@ static const char *cleanedSignalDescription(RACSignal *signal) {
 
 #pragma mark Lifecycle
 
+//组合subscriber、signal、disposable
 - (instancetype)initWithSubscriber:(id<RACSubscriber>)subscriber signal:(RACSignal *)signal disposable:(RACCompoundDisposable *)disposable {
 	NSCParameterAssert(subscriber != nil);
 
@@ -57,7 +58,7 @@ static const char *cleanedSignalDescription(RACSignal *signal) {
 	_innerSubscriber = subscriber;
 	_signal = signal;
 	_disposable = disposable;
-
+    //subscriber和subscriber关联起来
 	[self.innerSubscriber didSubscribeWithDisposable:self.disposable];
 	return self;
 }

@@ -22,9 +22,10 @@
 #pragma mark Lifecycle
 //初始化super.name,并且创建一个_backgroundScheduler的RACScheduler
 - (id)init {
-	self = [super initWithName:@"com.ReactiveCocoa.RACScheduler.subscriptionScheduler"];
+	self = [super initWithName:@"com.ReactiveCocoa.RACScheduler.subscriptionScheduler"];//添加名字
 	if (self == nil) return nil;
 
+    //_backgroundScheduler是一个target queue是优先级为default的global queue的串行queue
 	_backgroundScheduler = [RACScheduler scheduler];//backgroundScheduler属性是readonly，所以没有setter,这里直接给实例变量赋值
 
 	return self;
@@ -32,6 +33,7 @@
 
 #pragma mark RACScheduler
 
+//如果存在currentScheduler，那么执行block,如果没有就在backgroundScheduler的queue里面执行
 - (RACDisposable *)schedule:(void (^)(void))block {
 	NSCParameterAssert(block != NULL);
 

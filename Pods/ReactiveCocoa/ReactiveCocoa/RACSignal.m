@@ -129,6 +129,7 @@
 			if (removeDisposable) [compoundDisposable removeDisposable:finishedDisposable];
 		};
 
+        //把signal加入到signals，创建一个RACSerialDisposable放入compoundDisposable，用signal订阅事件
 		void (^addSignal)(RACSignal *) = ^(RACSignal *signal) {
 			@synchronized (signals) {
 				[signals addObject:signal];
@@ -154,13 +155,13 @@
 		@autoreleasepool {
 			RACSerialDisposable *selfDisposable = [[RACSerialDisposable alloc] init];
 			[compoundDisposable addDisposable:selfDisposable];
-
+            
 			RACDisposable *bindingDisposable = [self subscribeNext:^(id x) {
 				// Manually check disposal to handle synchronous errors.
 				if (compoundDisposable.disposed) return;
 
 				BOOL stop = NO;
-				id signal = bindingBlock(x, &stop);
+				id signal = bindingBlock(x, &stop);//1.RACReturnSignal
 
 				@autoreleasepool {
 					if (signal != nil) addSignal(signal);
@@ -294,6 +295,7 @@
 	return [self subscribe:o];
 }
 
+//创建RACSubscriber
 - (RACDisposable *)subscribeNext:(void (^)(id x))nextBlock error:(void (^)(NSError *error))errorBlock completed:(void (^)(void))completedBlock {
 	NSCParameterAssert(nextBlock != NULL);
 	NSCParameterAssert(errorBlock != NULL);
