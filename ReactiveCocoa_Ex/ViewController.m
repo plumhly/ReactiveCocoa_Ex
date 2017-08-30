@@ -39,7 +39,6 @@
         while ((ob = en.nextObject)) {
             NSLog(@"Enumerator %@", ob);
         }
-
     }
     
     {

@@ -250,7 +250,7 @@
 			}
 		}];
 
-		RACDisposable *otherDisposable = [signal subscribeNext:^(id x) {
+		RACDisposable *otherDisposable = [signal subscribeNext:^(id x) {//1.RACReplaySubject
 			@synchronized (selfValues) {
 				[otherValues addObject:x ?: RACTupleNil.tupleNil];
 				sendNext();

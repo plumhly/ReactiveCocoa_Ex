@@ -227,7 +227,7 @@
 }
 
 + (instancetype)zip:(id<NSFastEnumeration>)streams {
-	return [[self join:streams block:^(RACStream *left, RACStream *right) {
+	return [[self join:streams block:^(RACStream *left, RACStream *right) {//map <-> 原来的stream
 		return [left zipWith:right];
 	}] setNameWithFormat:@"+zip: %@", streams];
 }

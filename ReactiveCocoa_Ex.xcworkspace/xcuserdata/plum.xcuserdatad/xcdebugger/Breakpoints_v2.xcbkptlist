@@ -25,29 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Pods/ReactiveCocoa/ReactiveCocoa/RACScheduler.m"
-            timestampString = "525671939.02144"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "+currentScheduler"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Pods/ReactiveCocoa/ReactiveCocoa/NSObject+RACPropertySubscribing.m"
-            timestampString = "525693485.52875"
+            timestampString = "525777538.075157"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "-rac_valuesAndChangesForKeyPath:options:observer:"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "-rac_valuesForKeyPath:observer:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
