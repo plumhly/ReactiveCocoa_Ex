@@ -35,14 +35,17 @@ NSString *lowercaseStringPath = @keypath(NSString.new, lowercaseString);
  * refactoring, such that changing the name of the property will also update any
  * uses of \@keypath.
  */
+//若可变参数个数是1 -> keypath1(__VA_ARGS__),个数为2 -> keypath2(__VA_ARGS__)
 #define keypath(...) \
     metamacro_if_eq(1, metamacro_argcount(__VA_ARGS__))(keypath1(__VA_ARGS__))(keypath2(__VA_ARGS__))
 
+//strchr() 用来查找某字符在字符串中首次出现的位置，其原型为：char * strchr (const char *str, int c);
+//【参数】str 为要查找的字符串，c 为要查找的字符。【返回值】如果找到指定的字符则返回该字符所在地址，否则返回 NULL。
 #define keypath1(PATH) \
     (((void)(NO && ((void)PATH, NO)), strchr(# PATH, '.') + 1))
 
 #define keypath2(OBJ, PATH) \
-    (((void)(NO && ((void)OBJ.PATH, NO)), # PATH))//这里结果是# PATG => "PATG"
+    (((void)(NO && ((void)OBJ.PATH, NO)), # PATH))//这里结果是# PATH => "PATH"
 
 /**
  * \@collectionKeypath allows compile-time verification of key paths across collections NSArray/NSSet etc. Given a real object

@@ -32,6 +32,7 @@
     }];
     self.name = @"libo";
 
+    /*
     {
         NSArray *numbers = @[@1, @2, @3];
         NSEnumerator *en = [numbers objectEnumerator];
@@ -39,11 +40,6 @@
         while ((ob = en.nextObject)) {
             NSLog(@"Enumerator %@", ob);
         }
-    }
-    
-    {
-        
-        
     }
 
     {
@@ -58,6 +54,7 @@
     
         NSLog(@"%@",sequence.array);
     }
+     */
 }
 
 

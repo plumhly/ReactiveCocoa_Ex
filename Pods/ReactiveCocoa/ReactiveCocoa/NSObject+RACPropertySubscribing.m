@@ -64,7 +64,8 @@
 			@onExit {
 				[objectLock unlock];
 			};
-
+            
+            // You can annotate the local variable with the objc_precise_lifetime attribute if you want it to live til the end of the scope. Update: Thanks to TJ Usiyan for pointing out the NS_VALID_UNTIL_END_OF_SCOPE foundation wrapper for objc_precise_lifetime
 			__strong NSObject *observer __attribute__((objc_precise_lifetime)) = weakObserver;
 			__strong NSObject *self __attribute__((objc_precise_lifetime)) = weakSelf;
 
