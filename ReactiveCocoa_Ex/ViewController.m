@@ -26,11 +26,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    
+    
     int c = MI(1,2,3);
     [RACObserve(self, name) subscribeNext:^(NSString *x) {
         NSLog(@"%@", x);
     }];
     self.name = @"libo";
+    
+    
 
     /*
     {
