@@ -17,6 +17,9 @@
 @interface ViewController ()
 
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *reName;
+@property (nonatomic, assign) BOOL isEnable;
+
 
 @end
 
@@ -28,15 +31,25 @@
     [super viewDidLoad];
 
     
-    
+    /* round1
     int c = MI(1,2,3);
-    [RACObserve(self, name) subscribeNext:^(NSString *x) {
-        NSLog(@"%@", x);
+    [[RACObserve(self, name) filter:^BOOL(id value) {
+        return YES;
+    }]  subscribeNext:^(id x) {
+        NSLog(@"%@",x);
     }];
     self.name = @"libo";
+    */
     
     
-
+    //round2
+    RAC(self,isEnable) = [RACSignal combineLatest:@[RACObserve(self, name), RACObserve(self, reName)] reduce:^(NSString *fi, NSString *se){
+        return @([fi isEqualToString:se]);
+    }];
+    
+    self.name = @"libo";
+    self.reName = @"libo";
+    NSLog(@"");
     /*
     {
         NSArray *numbers = @[@1, @2, @3];
