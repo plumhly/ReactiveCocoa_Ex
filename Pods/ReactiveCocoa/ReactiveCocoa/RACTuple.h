@@ -114,6 +114,9 @@
 /// This and everything below is for internal use only.
 ///
 /// See RACTuplePack() and RACTupleUnpack() instead.
+//这里最终将可变参数拆分之后分别调用RACTuplePack_object_or_ractuplenil，比如
+//RACTuplePack_(x,y) =>  RACTuplePack_object_or_ractuplenil(0, _0)\ RACTuplePack_object_or_ractuplenil(1,_1),其中0，1表示参数的index,_0表示第一个参数，_1表示第二个参数
+//[RACTuple tupleWithObjectsFromArray:@[x,y,]]
 #define RACTuplePack_(...) \
     ([RACTuple tupleWithObjectsFromArray:@[ metamacro_foreach(RACTuplePack_object_or_ractuplenil,, __VA_ARGS__) ]])
 

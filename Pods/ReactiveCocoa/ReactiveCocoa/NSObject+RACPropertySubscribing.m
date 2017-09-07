@@ -75,7 +75,7 @@
 			}
 
 			return [self rac_observeKeyPath:keyPath options:options observer:observer block:^(id value, NSDictionary *change, BOOL causedByDealloc, BOOL affectedOnlyLastComponent) {
-				[subscriber sendNext:RACTuplePack(value, change)];
+				[subscriber sendNext:RACTuplePack(value, change)];//这里的value是属性的值【valueForKeyPath:】，change是kvo接收的字典
 			}];
 		}]
 		takeUntil:deallocSignal]

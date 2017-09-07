@@ -142,6 +142,7 @@
 				TargetAttributes = {
 					385ABDF41F24525300150901 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = R86UW7Z2FX;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -359,6 +360,7 @@
 			baseConfigurationReference = B2BE74E59A94BD75B9E6EBB8 /* Pods-ReactiveCocoa_Ex.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = R86UW7Z2FX;
 				INFOPLIST_FILE = ReactiveCocoa_Ex/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.plum.ReactiveCocoa-Ex";
@@ -371,6 +373,7 @@
 			baseConfigurationReference = EF7F32C45E93EE4B2C5DB023 /* Pods-ReactiveCocoa_Ex.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = R86UW7Z2FX;
 				INFOPLIST_FILE = ReactiveCocoa_Ex/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.plum.ReactiveCocoa-Ex";

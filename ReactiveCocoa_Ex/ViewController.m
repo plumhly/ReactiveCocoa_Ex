@@ -30,17 +30,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    
-    /* round1
+    /*
+    //round1
     int c = MI(1,2,3);
     [[RACObserve(self, name) filter:^BOOL(id value) {
         return YES;
     }]  subscribeNext:^(id x) {
         NSLog(@"%@",x);
     }];
+    
+    [RACObserve(self, name) subscribeNext:^(id x) {
+       NSLog(@"%@",x);
+    }];
     self.name = @"libo";
     */
-    
     
     //round2
     RAC(self,isEnable) = [RACSignal combineLatest:@[RACObserve(self, name), RACObserve(self, reName)] reduce:^(NSString *fi, NSString *se){
@@ -49,7 +52,7 @@
     
     self.name = @"libo";
     self.reName = @"libo";
-    NSLog(@"");
+//    NSLog(@"");
     /*
     {
         NSArray *numbers = @[@1, @2, @3];
@@ -83,6 +86,10 @@
 
 - (IBAction)buttonClick:(id)sender {
     self.name = @"plum";
+}
+
+- (void)test:(NSString *)n1 :(NSString *)n2 {
+    
 }
 
 // https://stackoverflow.com/questions/25126864/va-args-causing-exc-bad-access

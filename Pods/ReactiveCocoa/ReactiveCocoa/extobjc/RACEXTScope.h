@@ -28,6 +28,7 @@
  * (like a one line \c if). In practice, this is not an issue, since \@onExit is
  * a useless construct in such a case anyways.
  */
+//http://blog.sunnyxx.com/2014/09/15/objc-attribute-cleanup/
 #define onExit \
     rac_keywordify \
     __strong rac_cleanupBlock_t metamacro_concat(rac_exitBlock_, __LINE__) __attribute__((cleanup(rac_executeCleanupBlock), unused)) = ^
