@@ -35,9 +35,13 @@
                             <constraint firstItem="Gpn-1B-ZCP" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Ver-TE-KhN"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="button" destination="Gpn-1B-ZCP" id="ty9-IM-J1o"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="115.59220389805098"/>
         </scene>
     </scenes>
 </document>

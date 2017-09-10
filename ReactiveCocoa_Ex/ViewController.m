@@ -16,6 +16,8 @@
 
 @interface ViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *button;
+
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *reName;
 @property (nonatomic, assign) BOOL isEnable;
@@ -46,12 +48,21 @@
     */
     
     //round2
+    /*
     RAC(self,isEnable) = [RACSignal combineLatest:@[RACObserve(self, name), RACObserve(self, reName)] reduce:^(NSString *fi, NSString *se){
         return @([fi isEqualToString:se]);
     }];
     
     self.name = @"libo";
     self.reName = @"libo";
+     */
+    //round3
+    self.button.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        NSLog(@"press button");
+        return [RACSignal empty];
+    }];
+    
+    
 //    NSLog(@"");
     /*
     {
